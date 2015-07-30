@@ -4,20 +4,33 @@
 </head>
 
 <body>
+	<h2>{{testArray}}</h2>
+	{{# each Msgs}}
+<!-- 	<hr>
+	<h2>Text:{{this}}</h2>
+	<hr> -->
+	{{> message text=this}}
+
+	{{/each}}
+<!-- 	
   <hr>
   	{{> message number=1 text = "Hi Meteor! (m1)" }}
   <hr>
   	{{> message number=2 text = "Agilearning.io is awesome! (m2)" }}
   <hr>
   	{{> message number=3 text = "Agilearning.io is cute (m3)" }}
-  <hr>
+  <hr>  -->
 </body>
 
 
 
 <template name="message">
-	<h2>{{number}}</h2>
-	<h2>{{text}}</h2>
-	<h2>by message</h2>
+	<hr>
+	<h2>Number:{{number}}</h2>
+	<h2>Text:{{text}}</h2>
+	<p>by message</p>
+	<p>{{test}}</p>
+	<hr>
+
 </template>
 
