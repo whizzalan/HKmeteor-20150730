@@ -1,0 +1,23 @@
+<head>
+	<title>Hi! Meteor!</title>
+
+</head>
+
+<body>
+  <hr>
+  	{{> message number=1 text = "Hi Meteor! (m1)" }}
+  <hr>
+  	{{> message number=2 text = "Agilearning.io is awesome! (m2)" }}
+  <hr>
+  	{{> message number=3 text = "Agilearning.io is cute (m3)" }}
+  <hr>
+</body>
+
+
+
+<template name="message">
+	<h2>{{number}}</h2>
+	<h2>{{text}}</h2>
+	<h2>by message</h2>
+</template>
+
