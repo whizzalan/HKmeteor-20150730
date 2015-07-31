@@ -3,9 +3,10 @@ console.log("this is both sides.");
 
 if(Meteor.isClient){
   console.log("this is client!");
-  Template.message.helpers({
+ 
+ Template.message.helpers({
   	test:"test123"
-  })
+ })
 
   Template.body.helpers({
   	testArray: _.range(0,10),
