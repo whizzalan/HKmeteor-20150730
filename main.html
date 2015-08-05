@@ -4,6 +4,9 @@
 </head>
 
 <body>
+	<hr>
+	Message:<input id="inputMsg"/>
+	<hr>
 	{{# each Msgs}}
 
 	{{> message number=this.n 
@@ -11,8 +14,6 @@
 
 	{{/each}}
 </body>
-
-
 
 <template name="message">
 	<hr>
@@ -28,7 +29,7 @@
 	{{# if from}}
 	<p>from:{{from}}</p>
 	{{/if}}
-	
+
 	<hr>
 
 </template>

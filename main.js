@@ -25,6 +25,23 @@ if(Meteor.isClient){
 // 	{n:3, text: "Agilearning.io is cute (m3)"} 
 // ]
   })
+  // print input
+  Template.body.events({
+  	// e:event, t:template
+  	"change #inputMsg": function(e,t){
+  		console.log($(e.target).val());
+  		console.log("change #inputMsg");
+  		msg = $(e.target).val();
+  		// after message and clear space
+  		$(e.target).val("");
+  		msgData = {
+  			test:msg,
+  			createdAt: new Date,
+  		};
+  		console.log(msgData);
+  		Message.insert(msgData);
+  	}
+  })
 
 }
 
