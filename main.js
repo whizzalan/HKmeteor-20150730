@@ -4,7 +4,7 @@ console.log("this is both sides.");
 Message = new Mongo.Collection("message");
 
 sampleMessages = [
-	{text: "Hi Meteor! (m1)"},
+	{text: "Hi Meteor! (m1)", from :"db"},
 	{text: "Agilearning.io is awesome! (m2)"},
 	{text: "Agilearning.io is cute (m3)"} 
 ]
@@ -26,6 +26,12 @@ if(Meteor.isClient){
 
 if(Meteor.isServer){
   console.log("this is server");
+  // check data
+  if (Message.find().count() === 0){
+  	for (i in sampleMessages){
+  		Message.insert(sampleMessages[i])
+  	}
+  }
 }
 
 

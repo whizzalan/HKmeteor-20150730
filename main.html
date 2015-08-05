@@ -7,7 +7,7 @@
 	{{# each Msgs}}
 
 	{{> message number=this.n 
-	text=this.text}}
+	text=this.text from=this.from}}
 
 	{{/each}}
 </body>
@@ -17,12 +17,18 @@
 <template name="message">
 	<hr>
 	<!-- number print -->
+	<!-- handlebar.js -->
 	{{# if number}}
 	<h2>Number:{{number}}</h2>
 	{{/if}}
 	<h2>Text:{{text}}</h2>
 	<p>(by message template)</p>
 	<p>{{test}}</p>
+	<hr>
+	{{# if from}}
+	<p>from:{{from}}</p>
+	{{/if}}
+	
 	<hr>
 
 </template>
