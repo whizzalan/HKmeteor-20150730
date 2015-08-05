@@ -7,7 +7,7 @@ if(Meteor.isClient){
  Template.body.helpers({
   	// from data 
   	Msgs: function(){
-  		return(Message.find())
+  		return(Message.find({},{sort:{createdAt:-1}}))
   	}
   })
   // print input
