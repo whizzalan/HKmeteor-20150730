@@ -19,24 +19,37 @@ if(Meteor.isClient){
 
   		// after message and clear space
   		$("input").val("");
-  		console.log(msg)
-
-  		msgData = {
-  			text:msg,
-  			userId:usr,
-  			createdAt: new Date,
-  		};
 
 
-    // userId By Facebook
-    usr = Meteor.userId()
+      msgData = {
+        text:msg,
+        // userId:usr,
+        // createdAt: new Date,
+      };
 
-    if (usr){
-      msgData.userId = usr;
-      msgData.user = Meteor.user().profile.name;
-      Message.insert(msgData);
-    }
+      Meteor.call("createMessage", msgData)
+
+
+
   }
   })
 
 }
+if(Meteor.isServer){
+  Meteor.methods({
+    createMessage: function(msgData){
+    // userId By Facebook
+    usr = Meteor.userId()
+    if (usr){
+      msgData.userId = usr;
+      msgData.user = Meteor.user().profile.name;
+      msgData.createdAt = new Date;
+
+      Message.insert(msgData);
+    }
+
+    }
+  })
+}
+
+
