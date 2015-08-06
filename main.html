@@ -4,13 +4,19 @@
 </head>
 
 <body>
+  {{> guestbook}}
+</body>
+
+<!-- server:Template.body will reload -->
+
+
+<template name="guestbook">
+	<!-- login buttom -->
+	{{> loginButtons}}
 	<hr>
-	<form>
-	User:<input id="inputUsr"/>
-	<br>
+	<!-- User:<input id="inputUsr"/> -->
 	<br>
 	Message:<input id="inputMsg" />
-	</form>
 	<hr>
 	{{# each Msgs}}
 
@@ -18,7 +24,8 @@
 	text=this.text from=this.from user=this.user}}
 
 	{{/each}}
-</body>
+</template>
+
 
 <template name="message">
 	<hr>
