@@ -36,6 +36,9 @@ if(Meteor.isClient){
 
 }
 if(Meteor.isServer){
+  Meteor.publish(null,function(){
+    return(Message.find({},{limit:10,sort:{createdAt:-1}}))
+   })
   Meteor.methods({
     createMessage: function(msgData){
     // userId By Facebook
