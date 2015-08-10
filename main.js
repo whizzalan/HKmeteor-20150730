@@ -39,7 +39,11 @@ if(Meteor.isClient){
 }
 if(Meteor.isServer){
   Meteor.publish("pubMsgs",function(liminN){
+    //backend can see userId
+    // console.log(Meteor.useId()); // not to work
+    // console.log(this.userId);
     return(Message.find({},{limit:10,sort:{createdAt:-1}}))
+
    })
   Meteor.methods({
     createMessage: function(msgData){
