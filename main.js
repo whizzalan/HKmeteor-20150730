@@ -1,3 +1,8 @@
+Router.route('/hello', function(){
+  this.render('guestbook');
+});
+
+
 // global(Client & Server) not var
 Message = new Mongo.Collection("message");
  
