@@ -26,7 +26,12 @@ Router.map(function(){
         }.bind(this)
       }
       return(res)
+    },
+    waitOn: function(){
+      Meteor.subscribe("pubMsgsToChat",this.params.cid,10);
     }
+
+
   });
   
 })
@@ -38,9 +43,10 @@ Chatroom = new Mongo.Collection("chatroom");
  
 
 if(Meteor.isClient){
-  Meteor.startup(function(){
-    Meteor.subscribe("pubMsgs",20);
-  });  
+  // Meteor.startup(function(){
+  //   Meteor.subscribe("pubMsgs",20);
+  // });  
+
  Template.guestbook.helpers({
   	// from data 
   	Msgs: function(){
@@ -51,14 +57,17 @@ if(Meteor.isClient){
   Template.guestbook.events({
   	// e:event, t:template
   	"change #inputMsg": function(e,t){
-  	msg = $(e.target).val();
-		// usr = $("#inputUsr").val();
+      cid = Router.current().params.cid
+
+      msg = $(e.target).val();
+      // usr = $("#inputUsr").val();
 
   		// after message and clear space
   		$("input").val("");
 
       msgData = {
         text:msg,
+        chatroomId: cid, 
         // userId:usr,
         // createdAt: new Date,
       };
@@ -77,8 +86,8 @@ if(Meteor.isClient){
   Template.home.events({
     // e:event, t:template
     "change #createChatroom": function(e,t){
-    chatroomName = $(e.target).val();
-    // usr = $("#inputUsr").val();
+      chatroomName = $(e.target).val();
+      // usr = $("#inputUsr").val();
 
       // after message and clear space
       $("input").val("");
@@ -97,13 +106,22 @@ if(Meteor.isClient){
 
 }
 if(Meteor.isServer){
-  Meteor.publish("pubMsgs",function(liminN){
+  Meteor.publish("pubMsgs",function(limitN){
     //backend can see userId
     // console.log(Meteor.useId()); // not to work
     // console.log(this.userId);
-    return(Message.find({},{limit:10,sort:{createdAt:-1}}))
+    return(Message.find({},{sort:{createdAt:-1}, limitN}))
 
    })
+
+  Meteor.publish("pubMsgsToChat",function(cid,limitN){
+    //backend can see userId
+    // console.log(Meteor.useId()); // not to work
+    // console.log(this.userId);
+    return(Message.find({chatroomId:cid},{sort:{createdAt:-1}, limitN}))
+
+   })
+
   Meteor.publish(null,function(){
     return(Message.find({}))
   })
