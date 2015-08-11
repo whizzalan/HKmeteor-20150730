@@ -9,9 +9,43 @@
  -->
 <!-- server:Template.body will reload -->
 
-<template name='layout'>
-	<h2>Hello, Layout</h2>
+
+<template name='home'>
+	{{> loginButtons}}
+	<hr>
+	<!-- User:<input id="inputUsr"/> -->
+	<br>
+	Create Chatroom:<input id="createChatroom" />
+	<hr>
+	{{# each Chatrooms}}
+		{{> chatroom}}
+	{{/each}}
+
 </template>
+
+<template name="chatroomPage">
+	<a href="{{pathFor 'index'}}"></a>
+	<h2>{{chatroomData}}</h2>
+	{{> Template.dynamic tempate="chatroom" data="chatroomData"}}
+</template>	
+
+<template name="chatroom">
+<hr>
+<!-- 	<a href="chatroom/{{_id}}">
+		<h2>{{name}}</h2>
+	</a>
+ -->
+	<!-- pathFor from router -->
+	<a href="{{pathFor 'chatroom' cid=_id}}">
+		<h2>{{name}}</h2>
+	</a>
+
+	<p>created by {{user}}</p>
+	<p>{{createdAt}}</p>
+	<p>{{_id}}</p>
+<hr>
+</template>	
+
 <template name="guestbook">
 	<!-- login buttom -->
 	{{> loginButtons}}
