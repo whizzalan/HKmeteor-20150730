@@ -9,9 +9,22 @@
  -->
 <!-- server:Template.body will reload -->
 
+<template name="layout">
+	{{> topNav}}
+	<!-- by template auto filled -->
+	{{> yield}}
+</template>
+
+
+
+<template name="topNav">
+	<p>I am top Nav</p>
+	{{> loginButtons}}
+</template>
+
 
 <template name='home'>
-	{{> loginButtons}}
+	{{> topNav}}
 	<hr>
 	<!-- User:<input id="inputUsr"/> -->
 	<br>
@@ -24,10 +37,12 @@
 </template>
 
 <template name="chatroomPage">
-	{{> loginButtons}}
-	<a href="{{pathFor 'index'}}"></a>
-	<h2>{{chatroomData}}</h2>
-	{{> Template.dynamic tempate="chatroom" data="chatroomData"}}
+	{{> topNav}}
+	<a href="{{pathFor 'index'}}">Home</a>
+	<!-- <h2>{{chatroomData}}</h2> -->
+	{{> Template.dynamic template="chatroom" data="chatroomData"}}
+
+	{{> guestbook}}
 </template>	
 
 <template name="chatroom">

@@ -6,6 +6,10 @@
 //   this.render('guestbook');
 // });
 
+Router.configure({
+  layoutTemplate: 'layout'
+})
+
 Router.map(function(){
   this.route("index",{
     path: '/',
@@ -110,7 +114,7 @@ if(Meteor.isServer){
     //backend can see userId
     // console.log(Meteor.useId()); // not to work
     // console.log(this.userId);
-    return(Message.find({},{sort:{createdAt:-1}, limitN}))
+    return(Message.find({},{sort:{createdAt:-1},limit:limitN}))
 
    })
 
@@ -118,13 +122,17 @@ if(Meteor.isServer){
     //backend can see userId
     // console.log(Meteor.useId()); // not to work
     // console.log(this.userId);
-    return(Message.find({chatroomId:cid},{sort:{createdAt:-1}, limitN}))
+    return(Message.find({chatroomId:cid},{sort:{createdAt:-1}, limit:limitN}))
 
    })
-
+  // auto publish 
   Meteor.publish(null,function(){
-    return(Message.find({}))
+    // return([Message.find({}),Chatroom.find({})])
+    return(Chatroom.find({}))
   })
+
+
+
   Meteor.methods({
     createMessage: function(msgData){
     // userId By Facebook
